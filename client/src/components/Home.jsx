@@ -20,8 +20,8 @@ export default function Home() {
   const [description, setDescription] = useState("")
   const [sponsor, setSponsor] = useState("")
   const [promo, setPromo] = useState("")
+  const [loading, setLoading] = useState(false)
 
-  // console.log(fileImg, name, description, sponsor, promo)
   const walletAddress = process.env.REACT_APP_ADDRESS
 
   const sendJSONtoIPFS = async ImgHash => {
@@ -49,7 +49,7 @@ export default function Home() {
       console.log("Token URI", tokenURI)
       // mintNFT(tokenURI, currentAccount)
       safeMint(walletAddress, tokenURI).then(() => {
-        // setLoading(false)
+        setLoading(false)
         // setCounter(counter + 1)
         console.log("sucess")
       })
@@ -61,7 +61,7 @@ export default function Home() {
 
   const sendFileToIPFS = async e => {
     e.preventDefault()
-    // setLoading(true)
+    setLoading(true)
     try {
       if (fileImg) {
         const formData = new FormData()
@@ -84,32 +84,6 @@ export default function Home() {
     } catch (error) {
       console.log(error)
     }
-
-    // if (fileImg) {
-    //   try {
-    //     const formData = new FormData()
-    //     formData.append("file", fileImg)
-
-    //     const resFile = await axios({
-    //       method: "post",
-    //       url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
-    //       data: formData,
-    //       headers: {
-    //         pinata_api_key: pinataKey,
-    //         pinata_secret_api_key: pinataSecret,
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     })
-
-    //     const ImgHash = `ipfs://${resFile.data.IpfsHash}`
-    //     console.log(ImgHash)
-    //     sendJSONtoIPFS(ImgHash)
-    //   } catch (error) {
-    //     console.log("Error sending File to IPFS: ")
-    //     console.log(error)
-    //   }
-    // }
-    console.log("funciona envio")
   }
 
   const clearData = () => {
@@ -220,6 +194,7 @@ export default function Home() {
                 bg: "blue.500",
               }}
               type="submit"
+              isLoading={loading}
             >
               Mintear NFT
             </Button>
