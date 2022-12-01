@@ -1,0 +1,19 @@
+{
+  "name": "Una mano para Hernan",
+  "description": "El dia 14 de noviembre Hernan circulaba con su motocicleta en su trabajo como repartidor de comida. Lamentablemente una persona irresponsable y con signos de haber bebido alcohol choco con el con la mala suerte de que le fracturaron la pierna. Hoy Hernan se recupera de sus heridas, pero necesita de nuestra solidaridad para pagar su recuperacion y poder ayudar a su familia mientras se recupera. Con la compra del NFT no solo ayudas a Hernan sino tambien recibes beneficios de nuestros patrocinadores solidarios. Hoy por ti maniana por mi.",
+  "attributes": [
+    {
+      "trait_type": "Aqui se come",
+      "value": "Dos empanadas de cortesia"
+    },
+    {
+      "trait_type": "Tienda bebitos",
+      "value": "Descuento del 40% en cualquier producto"
+    },
+    {
+      "trait_type": "Nicol sport",
+      "value": "Sorteo balon de futbol"
+    }
+  ],
+  "image": "ipfs://QmXHGKh9N2fRfgAKhANyHG766Sck1EaKRwdh43FNdQUwi7"
+}
