@@ -9,10 +9,15 @@ import {
   useColorModeValue,
   Center,
   Textarea,
+  Box,
+  Image,
 } from "@chakra-ui/react"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { safeMint } from "../utils/scripts"
 import axios from "axios"
+
+import "./style.css"
+import { useEffect } from "react"
 
 export default function Home() {
   const [fileImg, setFileImg] = useState(null)
@@ -21,6 +26,7 @@ export default function Home() {
   const [sponsor, setSponsor] = useState("")
   const [promo, setPromo] = useState("")
   const [loading, setLoading] = useState(false)
+  const fileInputRef = useRef()
 
   const walletAddress = process.env.REACT_APP_ADDRESS
 
@@ -30,7 +36,7 @@ export default function Home() {
         method: "post",
         url: "https://api.pinata.cloud/pinning/pinJsonToIPFS",
         data: {
-          name: name,
+          name: `${name} - ${sponsor}`,
           description: description,
           attributes: [
             {
@@ -46,11 +52,8 @@ export default function Home() {
         },
       })
       const tokenURI = `ipfs://${resJSON.data.IpfsHash}`
-      console.log("Token URI", tokenURI)
-      // mintNFT(tokenURI, currentAccount)
       safeMint(walletAddress, tokenURI).then(() => {
         setLoading(false)
-        // setCounter(counter + 1)
         console.log("sucess")
       })
     } catch (error) {
@@ -93,6 +96,20 @@ export default function Home() {
     setPromo("")
   }
 
+  const [preview, setPreview] = useState()
+
+  useEffect(() => {
+    if (fileImg) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setPreview(reader.result)
+      }
+      reader.readAsDataURL(fileImg)
+    } else {
+      setPreview(null)
+    }
+  }, [fileImg])
+
   return (
     <form onSubmit={sendFileToIPFS}>
       <Flex
@@ -116,16 +133,43 @@ export default function Home() {
               Creación de NFT
             </Heading>
           </Center>
-
           <FormControl>
             <FormLabel>Subir imagen</FormLabel>
-            <Stack direction={["column", "row"]} spacing={6}>
+            <Stack direction={["column"]} spacing={6}>
+              {preview ? (
+                <Image src={preview} objectFit="cover" onClick={() => {
+                  setFileImg(null)
+                }}/>
+              ) : (
+                <Box boxSize="200px" paddingBottom={-10}>
+                  <button
+                    className="imagen"
+                    onClick={e => {
+                      e.preventDefault()
+                      fileInputRef.current.click()
+                    }}
+                  >
+                    Anadir imagen
+                  </button>
+                </Box>
+              )}
               <Input
                 type="file"
                 placeholder="subir imagen"
                 size="md"
                 p={1}
-                onChange={e => setFileImg(e.target.files[0])}
+                // aniadido
+                display="none"
+                ref={fileInputRef}
+                onChange={e => {
+                  // setFileImg(e.target.files[0])
+                  const file = e.target.files[0]
+                  if (file) {
+                    setFileImg(file)
+                  } else {
+                    setFileImg(null)
+                  }
+                }}
               />
             </Stack>
           </FormControl>

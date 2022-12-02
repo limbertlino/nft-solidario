@@ -14,13 +14,21 @@ const key = process.env.REACT_APP_ADDRESS_KEY
 
 //contract para interactuar con ethers
 
-const contract = new ethers.Contract(addressNFT, abi, bscProvider)
+const contract = new ethers.Contract(
+  "0x201b3022Bf3dAdcBFc7bA0605f316886276882bF",
+  abi,
+  bscProvider
+)
 
 //firma txs
 const signer = new ethers.Wallet(key, bscProvider)
 
 //contract firmado
-const contractSigned = new ethers.Contract(addressNFT, abi, signer)
+const contractSigned = new ethers.Contract(
+  "0x201b3022Bf3dAdcBFc7bA0605f316886276882bF",
+  abi,
+  signer
+)
 
 // Ver metadatos de un NFT
 // const viewURI = async id => {
@@ -65,7 +73,7 @@ const safeMint = async (address, URI) => {
   try {
     const mint = await contractSigned.safeMint(address, URI)
     const response = await mint
-    console.log(response)
+    // console.log(response)
   } catch (error) {
     console.log(error)
   }
@@ -77,4 +85,4 @@ const verDato = () => {
   console.log(abi)
 }
 
-module.exports = { getName, verDato, isMetamaskInstalled , safeMint}
+module.exports = { getName, verDato, isMetamaskInstalled, safeMint }
