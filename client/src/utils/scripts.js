@@ -30,27 +30,6 @@ const contractSigned = new ethers.Contract(
   signer
 )
 
-// Ver metadatos de un NFT
-// const viewURI = async id => {
-//   try {
-//     const URI = await contract.tokenURI(id)
-//     console.log(URI)
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-// // obtener simbolo del smart contract del nft
-// const getSymbol = async () => {
-//   try {
-//     const symbol = await contractSigned.symbol()
-//     console.log(symbol)
-//     return symbol
-//   } catch (getSymbolError) {
-//     console.log(getSymbolError)
-//   }
-// }
-
 // Obtener nombre del smart contract
 const getName = async () => {
   try {

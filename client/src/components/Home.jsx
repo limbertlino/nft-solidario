@@ -133,7 +133,7 @@ export default function Home() {
               Creación de NFT
             </Heading>
           </Center>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel>Subir imagen</FormLabel>
             <Stack direction={["column"]} spacing={6}>
               {preview ? (
@@ -174,7 +174,7 @@ export default function Home() {
             </Stack>
           </FormControl>
 
-          <FormControl id="name">
+          <FormControl id="name" isRequired>
             <FormLabel>Nombre NFT</FormLabel>
             <Input
               placeholder="Nombre NFT"
@@ -185,7 +185,7 @@ export default function Home() {
             />
           </FormControl>
 
-          <FormControl id="description">
+          <FormControl id="description" isRequired>
             <FormLabel>Descripción</FormLabel>
             <Textarea
               value={description}
@@ -194,7 +194,7 @@ export default function Home() {
             />
           </FormControl>
 
-          <FormControl id="sponsor">
+          <FormControl id="sponsor" isRequired>
             <FormLabel>Sponsor y promoción</FormLabel>
             <Input
               placeholder="Sponsor"
@@ -205,7 +205,7 @@ export default function Home() {
             />
           </FormControl>
 
-          <FormControl id="promo">
+          <FormControl id="promo" isRequired>
             <Input
               placeholder="Promoción"
               _placeholder={{ color: "gray.500" }}
